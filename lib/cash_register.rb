@@ -18,23 +18,19 @@ def add_item(title, price, quantity= 1)
    self.last_transaction_amount = price * quantity
   end
   
-  def apply_discount
-    if discount != 0
-      self.total = (total * ((100.0 - discount.to_f)/100)).to_i
-      "After the discount, the total comes to $#{self.total}."
+def apply_discount
+    if @discount > 0
+      @to_take_off = (price * discount)/100
+      @total -= @to_take_off
+      return "After the discount, the total comes to $#{total}."
     else
-      "There is no discount to apply."
+      return "There is no discount to apply."
     end
   end
 
-def items
-    new_register = []
-    @items.each do |x|
-      new_register << x
-    end
-    new_register
-
-end
+  def void_last_transaction
+    @total -= @price
+  end
   
   
 
